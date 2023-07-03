@@ -1,0 +1,37 @@
+{% extends 'registration/base.html' %}
+
+{% block title %}
+    <title>Login</title>
+{% endblock title %}
+
+{% block content %}
+    <h1>Login</h1>
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        {% if form.errors %}
+            <p>{{ form.errors.error }}</p>
+        {% endif %}
+
+        <form action="{% url 'login' %}" method="post">
+            <div>
+                {{ form.username.errors }}
+                <label for="{{ form.username.id_for_label }}">Username: </label>
+                {{ form.username }}
+                {{ form.username.help_text }}
+            </div>
+            <div>
+                {{ form.password.errors }}
+                <label for="{{ form.password.id_for_label }}">Password: </label>
+                {{ form.password }}
+                {{ form.password.help_text }}
+            </div>
+            {% csrf_token %}
+            <button type="submit">Submit</button>
+        </form>
+
+        <p>Forgot your password? <a href="{% url 'password_reset' %}">Change password</a></p>
+
+        <p>No account yet? <a href="{% url 'register' %}">Sign up</a></p>
+    {% endif %}
+{% endblock content %}
