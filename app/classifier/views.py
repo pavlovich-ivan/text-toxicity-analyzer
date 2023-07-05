@@ -2,13 +2,14 @@ import numpy as np
 import tensorflow as tf
 from pathlib import Path
 from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from .forms import CommentTextForm
 from .utils import clear_text
 from .models import Results
 
 # Create your views here.
-class ClassificationView(TemplateView):
+class ClassificationView(LoginRequiredMixin, TemplateView):
     template_name = 'classifier/classification.html'
 
     def get(self, request):
