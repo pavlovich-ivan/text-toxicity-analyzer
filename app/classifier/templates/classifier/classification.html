@@ -1,0 +1,17 @@
+<h1>Classification</h1>
+
+<form action="{% url 'classifier' %}" method="post">
+    {{ form }}
+    {% csrf_token %}
+    <button type="submit">Submit</button>
+</form>
+
+<div>
+    <h2>Results</h2>
+    <p>Toxic: {{results.toxic}}</p>
+    <p>Severe toxic: {{results.severe_toxic}}</p>
+    <p>Obscene: {{results.obscene}}</p>
+    <p>Threat: {{results.threat}}</p>
+    <p>Insult: {{results.insult}}</p>
+    <p>Identity hate: {{results.identity_hate}}</p>
+</div>
