@@ -1,17 +1,29 @@
-<h1>Classification</h1>
+{% extends 'classifier/base.html' %}
 
-<form action="{% url 'classifier' %}" method="post">
-    {{ form }}
-    {% csrf_token %}
-    <button type="submit">Submit</button>
-</form>
-
-<div>
-    <h2>Results</h2>
-    <p>Toxic: {{results.toxic}}</p>
-    <p>Severe toxic: {{results.severe_toxic}}</p>
-    <p>Obscene: {{results.obscene}}</p>
-    <p>Threat: {{results.threat}}</p>
-    <p>Insult: {{results.insult}}</p>
-    <p>Identity hate: {{results.identity_hate}}</p>
-</div>
+{% block content %}
+    <div class="container">
+        <div class="wrapper">
+            <div class="navbar">
+                <p>Hello {{ user.username }}. You've done N studies.</p>
+                <a href="{% url 'profile' %}">Profile</a>
+            </div>
+            <h1 class="header">Classification</h1>
+    
+            <form action="{% url 'classifier' %}" method="post">
+                {{ form }}
+                {% csrf_token %}
+                <button type="submit">Submit</button>
+            </form>
+        
+            <div>
+                <h1 class="header">Results</h1>
+                <p>Toxic: {{results.toxic}}</p>
+                <p>Severe toxic: {{results.severe_toxic}}</p>
+                <p>Obscene: {{results.obscene}}</p>
+                <p>Threat: {{results.threat}}</p>
+                <p>Insult: {{results.insult}}</p>
+                <p>Identity hate: {{results.identity_hate}}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
