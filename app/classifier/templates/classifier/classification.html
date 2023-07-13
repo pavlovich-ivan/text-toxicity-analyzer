@@ -4,20 +4,28 @@
     <div class="container">
         <div class="wrapper">
             <div class="navbar">
-                <p>Hello {{ user.username }}</p>
+                <div class="welcome_text">
+                    <p>Hello {{ user.username }}</p>
+                    <p>You have done {{studies_count}} studies</p>
+                </div>
                 <a href="{% url 'profile' %}">Profile</a>
-            </div>
-            <h1 class="header">Classification</h1>
-
-            <p>You have done {{studies_count}} studies</p>
+            </div>          
     
             <form action="{% url 'classifier' %}" method="post">
-                {{ form }}
+                <div>
+                    <label for="{{ form.comment_text.id_for_label }}" class="enter_text">Enter your text below</label>
+                    <div>
+                        {{ form.comment_text }}
+                    </div>
+                    {{ form.comment_text.help_text }}
+                </div>
                 {% csrf_token %}
-                <button type="submit">Submit</button>
+                <div class="field">
+                    <button type="submit">Submit</button>
+                </div>
             </form>
         
-            <div>
+            <div class="results">
                 <h1 class="header">Results</h1>
                 <p>Toxic: {{results.toxic}}</p>
                 <p>Severe toxic: {{results.severe_toxic}}</p>
