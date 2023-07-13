@@ -80,3 +80,14 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.back {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+}
