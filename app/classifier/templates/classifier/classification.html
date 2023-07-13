@@ -4,10 +4,12 @@
     <div class="container">
         <div class="wrapper">
             <div class="navbar">
-                <p>Hello {{ user.username }}. You've done N studies.</p>
+                <p>Hello {{ user.username }}</p>
                 <a href="{% url 'profile' %}">Profile</a>
             </div>
             <h1 class="header">Classification</h1>
+
+            <p>You have done {{studies_count}} studies</p>
     
             <form action="{% url 'classifier' %}" method="post">
                 {{ form }}

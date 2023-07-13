@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from .forms import CommentTextForm
 from .utils import clear_text
-from .models import Results
+from .models import Results, UserStudiesCount
 
 
 # Create your views here.
@@ -14,8 +14,16 @@ class ClassificationView(LoginRequiredMixin, TemplateView):
     template_name = "classifier/classification.html"
 
     def get(self, request):
+        try:
+            user_studies_count = UserStudiesCount.objects.get(user=request.user)
+        except:
+            studies_count = 0
+        else:
+            studies_count = user_studies_count.count
+        
         context = {
             "form": CommentTextForm(),
+            "studies_count": studies_count,
         }
         return render(request, self.template_name, context)
 
@@ -42,6 +50,10 @@ class ClassificationView(LoginRequiredMixin, TemplateView):
                 identity_hate=predict[0][5],
             )
             results.save()
+
+            user_studies_count = UserStudiesCount.objects.get(user=request.user)
+            user_studies_count.count += 1
+            user_studies_count.save()
 
             context = {
                 "form": form,
